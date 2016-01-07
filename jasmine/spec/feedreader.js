@@ -81,7 +81,7 @@ $(function() {
 
                 setTimeout(function() {
                     done(); 
-                }, 500);
+                }, 250);
             });
 
             it('to be visible', function(done) {
@@ -110,7 +110,7 @@ $(function() {
             });
          });
 
-         it('has at least a single item', function(done) {
+         it('have at least a single item', function(done) {
             var feedContainer = $('.feed');
             var feedCount = feedContainer.children().length;
             expect(feedCount).toBeGreaterThan(0);
@@ -139,5 +139,43 @@ $(function() {
             expect(newFeedContent).not.toMatch(originalFeedContent);
             done();
          });
+    });
+
+    /* TODO: Header title matches the selected feed list item
+     * This test suite loops through the allFeeds object, and loads
+     * the page for each defined feed. Then for each page, the specs
+     * check that the text of the title in the page header matches the 
+     * name of the feed defined in the allFeeds object.
+     */ 
+    describe('Header Title', function() {
+        var feedListIndex;
+
+        beforeAll(function() {
+            feedListIndex = 0;
+        });
+
+        beforeEach(function(done) {
+            loadFeed(feedListIndex, function() {
+                done();
+            });
+        });
+
+        afterAll(function() {
+            loadFeed(0);
+        });
+
+        var headerTitleTest = function(feed) {
+            it('matches name of selected feed (' + feed.name + ')', function(done) {
+                var $feedName = $('.header-title').text();
+                console.log('feed name: ' + $feedName);
+                expect($feedName).toMatch(feed.name);
+                feedListIndex++;
+                done();
+            });
+        };
+
+        for(var i = 0; i < allFeeds.length; i++){
+            headerTitleTest(allFeeds[i]);
+        }    
     });
 }());

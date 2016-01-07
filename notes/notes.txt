@@ -44,4 +44,8 @@ var allFeeds = [
         url: 'http://feeds.feedburner.com/udacity-linear-digressions'
     }
 ];
+
+5) Loops in Jasmine
+
+http://tosbourn.com/using-loops-in-jasmine/
  

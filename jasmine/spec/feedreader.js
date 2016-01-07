@@ -51,11 +51,11 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function() {
-        var menu = $('.slide-menu');
+        var $menu = $('.slide-menu');
 
         var menuHidden = function() {
-            var menuRight = menu.position().left + menu.width();
-            var menuBottom = menu.position().top + menu.height();
+            var menuRight = $menu.position().left + $menu.width();
+            var menuBottom = $menu.position().top + $menu.height();
             return (menuRight <= 0) || (menuBottom <= 0);
         };
 
@@ -74,10 +74,10 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
          describe('changes visibility', function() {
-            var menuIcon = $('.header a');
+            var $menuIcon = $('.header a');
 
             beforeEach(function(done) {
-                menuIcon.trigger('click');
+                $menuIcon.trigger('click');
 
                 setTimeout(function() {
                     done(); 
@@ -111,8 +111,8 @@ $(function() {
          });
 
          it('have at least a single item', function(done) {
-            var feedContainer = $('.feed');
-            var feedCount = feedContainer.children().length;
+            var $feedContainer = $('.feed');
+            var feedCount = $feedContainer.children().length;
             expect(feedCount).toBeGreaterThan(0);
             done();
          });
@@ -124,19 +124,18 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         //var originalFeedContent;
-         var originalFeedContent;
+         var $originalFeedContent;
 
          beforeEach(function(done) {
-            originalFeedContent = $('.feed').html();
+            $originalFeedContent = $('.feed').html();
             loadFeed(1, function() {
                 done();
             });
          });
 
          it('changes the content in the feed container', function(done) {
-            var newFeedContent = $('.feed').html();
-            expect(newFeedContent).not.toMatch(originalFeedContent);
+            var $newFeedContent = $('.feed').html();
+            expect($newFeedContent).not.toMatch($originalFeedContent);
             done();
          });
     });

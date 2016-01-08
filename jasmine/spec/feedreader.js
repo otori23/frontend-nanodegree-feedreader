@@ -35,7 +35,7 @@ $(function() {
         it('have a url defined for each feed', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url).not.toBe(0);
+                expect(feed.url.length).not.toBe(0);
             });
         });
 
@@ -46,7 +46,7 @@ $(function() {
         it('have a name defined for each feed', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
-                expect(feed.name).not.toBe(0);
+                expect(feed.name.length).not.toBe(0);
             });
         });
     });
@@ -126,12 +126,12 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        var $originalFeedContent;
+        var $originalFeedContent, $newFeedContent;
 
         beforeEach(function(done) {
-            $originalFeedContent = $('.feed').html();
-            loadFeed(1, function() {
-                done();
+            loadFeed(0, function() {
+                $originalFeedContent = $('.feed').html();
+                loadFeed(1, done);
             });
         });
 

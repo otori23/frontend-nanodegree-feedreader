@@ -48,4 +48,14 @@ var allFeeds = [
 5) Loops in Jasmine
 
 http://tosbourn.com/using-loops-in-jasmine/
+
+6) http://jsbeautifier.org/
+
+- beautify, unpack or deobfuscate JavaScript and HTML, make JSON/JSONP readable, etc.
+- all of the source code is completely free and open, available on GitHub under MIT licence, 
+- and we have a command-line version, python library and a node package as well.
+
+7) http://www.jslint.com/
+
+- lint js in browser
  

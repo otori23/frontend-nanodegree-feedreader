@@ -142,7 +142,7 @@ $(function() {
         });
     });
 
-    /* Ensure header title matches the selected feed list item.
+    /* Regression test to ensure that 'loadFeed' sets the page header title correctly
      * This test suite loops through the allFeeds object, and loads
      * the page for each defined feed. Then for each page, the specs
      * check that the text of the title in the page header matches the

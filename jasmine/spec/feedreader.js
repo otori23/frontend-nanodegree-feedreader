@@ -9,10 +9,12 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
+    "use strict";
+
     /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
+     * a related set of tests. This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
@@ -26,30 +28,30 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('have a url defined for each feed', function() {
-            allFeeds.forEach(function(feed){
+        it('have a url defined for each feed', function() {
+            allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url).not.toBe(0);
             });
-         });
+        });
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('have a name defined for each feed', function() {
-            allFeeds.forEach(function(feed){
+        it('have a name defined for each feed', function() {
+            allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name).not.toBe(0);
             });
-         });
+        });
     });
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Write a new test suite named "The menu" */
     describe('The menu', function() {
         var $menu = $('.slide-menu');
 
@@ -59,94 +61,94 @@ $(function() {
             return (menuRight <= 0) || (menuBottom <= 0);
         };
 
-        /* TODO: Write a test that ensures the menu element is
+        /* Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-         it('is hidden by default', function() {
+        it('is hidden by default', function() {
             expect(menuHidden()).toBe(true);
-         });
+        });
 
-        /* TODO: Write a test that ensures the menu changes
+        /* Write a test that ensures the menu changes
          * visibility when the menu icon is clicked. This test
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
-         describe('changes visibility', function() {
+        describe('changes visibility', function() {
             var $menuIcon = $('.header a');
 
             beforeEach(function(done) {
                 $menuIcon.trigger('click');
 
                 setTimeout(function() {
-                    done(); 
+                    done();
                 }, 250);
             });
 
             it('to be visible', function(done) {
                 expect(menuHidden()).toBe(false);
                 done();
-             });
+            });
 
             it('to be hidden', function(done) {
                 expect(menuHidden()).toBe(true);
                 done();
             });
-         });
+        });
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-         beforeEach(function(done) {
+        beforeEach(function(done) {
             loadFeed(0, function() {
                 done();
             });
-         });
+        });
 
-         it('have at least a single item', function(done) {
+        it('have at least a single item', function(done) {
             var $feedContainer = $('.feed');
             var feedCount = $feedContainer.children().length;
             expect(feedCount).toBeGreaterThan(0);
             done();
-         });
+        });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         var $originalFeedContent;
+        var $originalFeedContent;
 
-         beforeEach(function(done) {
+        beforeEach(function(done) {
             $originalFeedContent = $('.feed').html();
             loadFeed(1, function() {
                 done();
             });
-         });
+        });
 
-         it('changes the content in the feed container', function(done) {
+        it('changes the content in the feed container', function(done) {
             var $newFeedContent = $('.feed').html();
             expect($newFeedContent).not.toMatch($originalFeedContent);
             done();
-         });
+        });
     });
 
-    /* TODO: Header title matches the selected feed list item
+    /* Ensure header title matches the selected feed list item.
      * This test suite loops through the allFeeds object, and loads
      * the page for each defined feed. Then for each page, the specs
-     * check that the text of the title in the page header matches the 
+     * check that the text of the title in the page header matches the
      * name of the feed defined in the allFeeds object.
-     */ 
-    describe('Header Title', function() {
+     */
+    describe('Page Header Title', function() {
         var feedListIndex;
 
         beforeAll(function() {
@@ -173,8 +175,8 @@ $(function() {
             });
         };
 
-        for(var i = 0; i < allFeeds.length; i++){
-            headerTitleTest(allFeeds[i]);
-        }    
+        allFeeds.forEach(function(feed) {
+            headerTitleTest(feed);
+        });
     });
 }());

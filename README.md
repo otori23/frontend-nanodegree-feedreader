@@ -1,3 +1,19 @@
+# UdaciFeeds Testing
+
+## Additional Test Suite: Page Header Title
+
+This test suite contains specs that check to verify that the title in the header of the page for a particular feed matches the name of the feed selected from the feed menu. This test suite loops through each item in the allFeeds object and loads the associated feed's web page. The header title on the web page is then compared against the name property of the particular feed item from the allFeeds object. The spec passes if there is an exact match, otherwise the spec fails.
+
+## Test Run
+
+Loading the index.html file in a browser executes the test specs. The results of the test run are displayed at the bottom of the test page. The additional test suite, for the page header, takes some time to run because it loads the feed for each item in the allFeeds object. So, expect the test run to take about 5 - 6 seconds to complete.
+
+## Reference(s)
+
+http://tosbourn.com/using-loops-in-jasmine/
+
+---------------------
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.

@@ -76,24 +76,34 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
         describe('changes visibility', function() {
-            var $menuIcon = $('.header a');
+            var $menuIcon,
+                originalTransition;
 
-            beforeEach(function(done) {
+            beforeAll(function() {
+                $menuIcon = $('.header a');
+
+                // store the current transition (since you'll reset it)
+                originalTransition = $menu.css('transition');
+
+                // reset the transition so you can test it
+                $menu.css('transition', 'all 0s ease 0s');
+            });
+
+            beforeEach(function() {
                 $menuIcon.trigger('click');
-
-                setTimeout(function() {
-                    done();
-                }, 250);
             });
 
-            it('to be visible', function(done) {
+            afterAll(function() {
+                // restore the original transitions
+                $menu.css('transition', originalTransition);
+            });
+
+            it('to be visible', function() {
                 expect(menuHidden()).toBe(false);
-                done();
             });
 
-            it('to be hidden', function(done) {
+            it('to be hidden', function() {
                 expect(menuHidden()).toBe(true);
-                done();
             });
         });
     });
@@ -112,11 +122,10 @@ $(function() {
             });
         });
 
-        it('have at least a single item', function(done) {
+        it('have at least a single item', function() {
             var $feedContainer = $('.feed');
             var feedCount = $feedContainer.children().length;
             expect(feedCount).toBeGreaterThan(0);
-            done();
         });
     });
 
@@ -135,10 +144,9 @@ $(function() {
             });
         });
 
-        it('changes the content in the feed container', function(done) {
+        it('changes the content in the feed container', function() {
             var $newFeedContent = $('.feed').html();
             expect($newFeedContent).not.toMatch($originalFeedContent);
-            done();
         });
     });
 
@@ -161,14 +169,14 @@ $(function() {
             });
         });
 
-        afterAll(function() {
+        afterAll(function(done) {
             loadFeed(0);
+            done();
         });
 
         var headerTitleTest = function(feed) {
             it('matches name of selected feed (' + feed.name + ')', function(done) {
                 var $feedName = $('.header-title').text();
-                console.log('feed name: ' + $feedName);
                 expect($feedName).toMatch(feed.name);
                 feedListIndex++;
                 done();
